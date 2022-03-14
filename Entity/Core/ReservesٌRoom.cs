@@ -9,6 +9,8 @@ namespace Entity.Core
 {
    public class ReservesٌRoom:EntityId
     {
+        public DateTime CheckFrom { get; set; }
+        public DateTime CheckTo{ get; set; }
         public Guid RoomId { get; set; }
         public Guid PersonId { get; set; }
         public Person person { get; set; }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Entity.Core;
 using Repository.Context;
 using Repository.Interface;
@@ -63,6 +64,11 @@ namespace Repository.Implementation
                             _mealPerPersonRepository=new GenericRepository<MealPerPerson>(_context);
                 return  _mealPerPersonRepository;
               } 
+        }
+
+        public async Task<int> saveAsync()
+        {
+          return await  _context.SaveChangesAsync();
         }
     }
 }

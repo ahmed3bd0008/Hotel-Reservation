@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Entity.Core;
 using Repository.Implementation;
 
@@ -11,5 +12,6 @@ namespace Repository.Interface
            GenericRepository<MealPlane> MealPlaneRepository { get; }
            GenericRepository<MealType> MealTypeRepository { get; }
            GenericRepository<MealPerPerson>MealPerPersonRepository { get; }
+           Task<int>saveAsync();
     }
 }
