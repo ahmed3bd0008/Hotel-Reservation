@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -12,9 +13,9 @@ namespace Repository.Interface
         void updateEntity(T entity);
         List<T> getEntity (bool track);
         Task< List<T>> getEntityAsync (bool track);
-        Task< List<T>> getEntityAsync (Expression<Func<T,bool>> expression,bool track);
-        List<T> getEntity (Expression<Func<T,bool>> expression,bool track);
+         IQueryable<T> getEntity (Expression<Func<T,bool>> expression,bool track);
         T getEntityById(Guid id);
         Task< T> getEntityAsyncById(Guid id);
+        void Remove(T Entity);
     }
 }

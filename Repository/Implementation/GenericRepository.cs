@@ -9,7 +9,7 @@ using Repository.Context;
 using Repository.Interface;
 namespace Repository.Implementation
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : EntityId
     {
         private readonly AppDbContextTest _context;
         private readonly DbSet<T> _entity;
@@ -43,9 +43,9 @@ namespace Repository.Implementation
         {
              return  track?await _entity.AsNoTracking().Where(expression).ToListAsync():await _entity.Where(expression).ToListAsync();
         }
-         public List<T> getEntity(Expression<Func<T, bool>> expression, bool track)
+         public IQueryable<T> getEntity(Expression<Func<T, bool>> expression, bool track)
         {
-             return  track? _entity.AsNoTracking().Where(expression).ToList():_entity.Where(expression).ToList();
+             return  track? _entity.AsNoTracking().Where(expression):_entity.Where(expression);
         }
         public async Task<T> getEntityAsyncById(Guid id)
         {
@@ -61,5 +61,12 @@ namespace Repository.Implementation
         {
            _entity.Update(entity);
         }
+
+        public void Remove(T Entity)
+        {
+           _entity.Remove(Entity);
+        }
+
+        
     }
 }

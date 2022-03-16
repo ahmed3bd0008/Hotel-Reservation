@@ -7,7 +7,7 @@ namespace Repository.Implementation
     public class UntityOfWork : IUntityOfWork
     {
         private readonly AppDbContextTest _context;
-        private  GenericRepository<Room> _genericRepository;
+        private  RoomRepository _genericRepository;
         private  GenericRepository<RoomType> _roomTypeRepository;
         private  GenericRepository<RoomRate> _roomRateRepository;
         private  GenericRepository<MealPlane> _mealPlaneRepository;
@@ -22,7 +22,7 @@ namespace Repository.Implementation
          public GenericRepository<Room> roomRepository {
               get{
                   if(_genericRepository==null)
-                            _genericRepository=new GenericRepository<Room>(_context);
+                            _genericRepository=new RoomRepository(_context);
                 return  _genericRepository;
               } 
               }

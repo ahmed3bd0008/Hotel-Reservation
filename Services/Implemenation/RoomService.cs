@@ -57,8 +57,8 @@ namespace Services.Implemenation
 
         public async Task<ResponseService<List<RoomDto>>> GetRooms()
         {
-            var Rooms=await _untityOfWork.roomRepository.
-               getEntityAsync(d=>!d.reserves.Any(f=>f.CheckTo>=DateTime.Now),false);
+            var Rooms= _untityOfWork.roomRepository.
+               getEntity(d=>!d.reserves.Any(f=>f.CheckTo>=DateTime.Now),false);
             var RoomsDto=_mapper.Map<List<RoomDto>>(Rooms);
             return new ResponseService<List<RoomDto>>(){Data=RoomsDto,Status=true};
         }
@@ -70,34 +70,57 @@ namespace Services.Implemenation
             return new ResponseService<List<RoomTypeDto>>(){Data=RoomsDto,Status=true};
         }
 
-        public Task<ResponseService<int>> RemoveRoom(Guid id)
+        public async Task<ResponseService<int>> RemoveRoom(Guid id)
         {
-            throw new NotImplementedException();
+          var Room=  await _untityOfWork.roomRepository.getEntityAsyncById(id);
+          if(Room==null)
+                return  new ResponseService<int>(){Message="false"};
+            _untityOfWork.roomRepository.Remove(Room);
+            return new ResponseService<int>(){Message="delete"};
         }
 
-        public Task<ResponseService<int>> RemoveRoomRate(Guid id)
+        public async Task<ResponseService<int>> RemoveRoomRate(Guid id)
         {
-            throw new NotImplementedException();
+           var RoomType=  await _untityOfWork.roomTypeRepository.getEntityAsyncById(id);
+          if(RoomType==null)
+                return  new ResponseService<int>(){Message="false"};
+            _untityOfWork.roomTypeRepository.Remove(RoomType);
+            return new ResponseService<int>(){Message="delete"};
         }
 
-        public Task<ResponseService<int>> RemoveRoomtype(Guid id)
+        public async Task<ResponseService<int>> RemoveRoomtype(Guid id)
         {
-            throw new NotImplementedException();
+            var RoomRate=  await _untityOfWork.roomRateRepository.getEntityAsyncById(id);
+            if(RoomRate==null)
+                return  new ResponseService<int>(){Message="false"};
+            _untityOfWork.roomRateRepository.Remove(RoomRate);
+            return new ResponseService<int>(){Message="delete"};
         }
 
-        public Task<ResponseService<int>> UpateRoom(UpdateRoomDto updateRoomDto)
+        public async Task<ResponseService<int>> UpateRoom(UpdateRoomDto updateRoomDto)
         {
-            throw new NotImplementedException();
+             var Room=  await _untityOfWork.roomRepository.getEntityAsyncById(updateRoomDto.Id); 
+             _mapper.Map(updateRoomDto,Room);
+             await  _untityOfWork.saveAsync();
+             return new ResponseService<int>(){Message="true"};
         }
 
-        public Task<ResponseService<int>> UpateRoomRate(UpdateRoomRateDto updateRoomRateDto)
+        public async Task<ResponseService<int>> UpateRoomRate(UpdateRoomRateDto updateRoomRateDto)
         {
-            throw new NotImplementedException();
+           
+
+              var RoomRate=   _untityOfWork.roomRateRepository.getEntity(d=>d.RoomTypeId==updateRoomRateDto.RoomTypeId,false); 
+             _mapper.Map(updateRoomRateDto,RoomRate);
+             await  _untityOfWork.saveAsync();
+             return new ResponseService<int>(){Message="true"};
         }
 
-        public Task<ResponseService<int>> UpateRoomType(UpdateRoomTypeDto updateRoomTypeDto)
+        public async Task<ResponseService<int>> UpateRoomType(UpdateRoomTypeDto updateRoomTypeDto)
         {
-            throw new NotImplementedException();
+              var RoomType=  await _untityOfWork.roomTypeRepository.getEntityAsyncById(updateRoomTypeDto.Id); 
+             _mapper.Map(updateRoomTypeDto,RoomType);
+             await  _untityOfWork.saveAsync();
+             return new ResponseService<int>(){Message="true"};
         }
     }
 }

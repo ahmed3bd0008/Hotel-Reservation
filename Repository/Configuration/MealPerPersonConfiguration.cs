@@ -11,7 +11,7 @@ namespace Repository.Configuration
            HasForeignKey(fk=>fk.MealTypeId).
            OnDelete(DeleteBehavior.ClientNoAction); 
 
-           builder.HasKey(d=>new {d.MealTypeId,d.ToDate,d.FromDate}); 
+         
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Repository.Configuration
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<RoomRate> builder)
         {
-           builder.HasKey(d=>new {d.RoomTypeId,d.FromDate,d.ToDate});
+        
            builder.HasOne(o=>o.RoomType).
                 WithMany(m=>m.roomRates).
                 HasForeignKey(fk=>fk.RoomTypeId).
