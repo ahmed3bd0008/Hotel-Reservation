@@ -25,65 +25,65 @@ namespace TestApplication.Controllers
         }
 
         [HttpGet("GetMeal")]
-        public IActionResult GetMeal()
+        public async Task< IActionResult >GetMeal()
         {
-            return Ok(_mealService.GetMeals());
+            return Ok(await _mealService.GetMeals());
         }
         [HttpPost("AddMeal")]
-        public IActionResult addMeal(AddMealPlaneDto addMealDto)
+        public async Task< IActionResult> addMeal(AddMealPlaneDto addMealDto)
         {
-            return Ok(_mealService.AddMeal(addMealDto));
+            return Ok(await _mealService.AddMeal(addMealDto));
         }
         [HttpPut("updateMeal")]
-        public IActionResult addMeal(UpdateMealPlaneDto updateMealDto)
+        public async Task< IActionResult> addMeal(UpdateMealPlaneDto updateMealDto)
         {
-            return Ok(_mealService.UpateMeal(updateMealDto));
+            return Ok(await _mealService.UpateMeal(updateMealDto));
         }
         [HttpDelete("DeleteMeal/{id}")]
-        public IActionResult DeleteMeal(int id)
+        public async Task< IActionResult> DeleteMeal(int id)
         {
-            return Ok(_mealService.RemoveMeal(id));
+            return Ok(await _mealService.RemoveMeal(id));
         }
         
         [HttpGet("GetMealType")]
-        public IActionResult GetMealType()
+        public async Task< IActionResult> GetMealType()
         {
-            return Ok(_mealService.GetMealType());
+            return Ok(await _mealService.GetMealType());
         }
         [HttpPost("AddMealType")]
-        public IActionResult AddMealType(AddMealTypeDto addMealTypeDto)
+        public async Task< IActionResult> AddMealType(AddMealTypeDto addMealTypeDto)
         {
-            return Ok(_mealService.AddMealType(addMealTypeDto));
+            return Ok(await _mealService.AddMealType(addMealTypeDto));
         }
         [HttpPut("updateMealType")]
-        public IActionResult UpadetrMealType(UpdateMealTypeDto updateMealTypeDto)
+        public async Task< IActionResult> UpadetrMealType(UpdateMealTypeDto updateMealTypeDto)
         {
-            return Ok(_mealService.UpateMealType(updateMealTypeDto));
+            return Ok(await _mealService.UpateMealType(updateMealTypeDto));
         }
         [HttpDelete("DeleteMealType/{id}")]
-        public IActionResult DeleteMealType(int id)
+        public async Task< IActionResult >DeleteMealType(int id)
         {
-            return Ok(_mealService.RemoveMeal(id));
+            return Ok(await _mealService.RemoveMeal(id));
         }
         [HttpGet("GetMealRate")]
-        public IActionResult GetMealRate()
+        public async Task< IActionResult> GetMealRate()
         {
-            return Ok(_mealService.GetMealType());
+            return Ok(await _mealService.GetMealType());
         }
         [HttpPost("AddMealRate")]
-        public IActionResult addMealRate(AddMealPerPersonDto addMealRateDto)
+        public async Task< IActionResult> addMealRate(AddMealPerPersonDto addMealRateDto)
         {
-            return Ok(_mealService.AddMealRate(addMealRateDto));
+            return Ok(await _mealService.AddMealRate(addMealRateDto));
         }
         [HttpPut("updateMealRate")]
-        public IActionResult UpateMealRate(UpdateMealPerPersonDto updateMealRateDto)
+        public async Task< IActionResult >UpateMealRate(UpdateMealPerPersonDto updateMealRateDto)
         {
-            return Ok(_mealService.UpateMealRate(updateMealRateDto));
+            return Ok ( await _mealService.UpateMealRate(updateMealRateDto));
         }
         [HttpDelete("DeleteMealRate/{id}")]
-        public IActionResult DeleteMealRate(int id)
+        public async Task< IActionResult> DeleteMealRate(int id)
         {
-            return Ok(_mealService.RemoveMealRate(id));
+            return Ok(await _mealService.RemoveMealRate(id));
         }
     }
 }

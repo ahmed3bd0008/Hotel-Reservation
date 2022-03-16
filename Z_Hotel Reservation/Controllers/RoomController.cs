@@ -24,64 +24,64 @@ namespace TestApplication.Controllers
         }
 
         [HttpGet("GetRoom")]
-        public IActionResult GetRoom()
+        public async Task<IActionResult> GetRoom()
         {
-            return Ok(_roomService.GetRooms());
+            return Ok( await _roomService.GetRooms());
         }
         [HttpPost("AddRoom")]
-        public IActionResult addRoom(AddRoomDto addRoomDto)
+        public async Task<IActionResult> addRoom(AddRoomDto addRoomDto)
         {
-            return Ok(_roomService.AddRoom(addRoomDto));
+            return Ok(await _roomService.AddRoom(addRoomDto));
         }
         [HttpPut("updateRoom")]
-        public IActionResult addRoom(UpdateRoomDto updateRoomDto)
+        public async Task<IActionResult> addRoom(UpdateRoomDto updateRoomDto)
         {
-            return Ok(_roomService.UpateRoom(updateRoomDto));
+            return Ok(await _roomService.UpateRoom(updateRoomDto));
         }
         [HttpDelete("DeleteRoom/{id}")]
-        public IActionResult DeleteRoom(int id)
+        public async Task<IActionResult> DeleteRoom(int id)
         {
-            return Ok(_roomService.RemoveRoom(id));
+            return Ok(await _roomService.RemoveRoom(id));
         }
         [HttpGet("GetRoomType")]
-        public IActionResult GetRoomType()
+        public async Task<IActionResult> GetRoomType()
         {
-            return Ok(_roomService.GetRoomType());
+            return Ok(await _roomService.GetRoomType());
         }
         [HttpPost("AddRoomType")]
-        public IActionResult addType(AddRoomTypeDto addRoomTypeDto)
+        public async Task<IActionResult> addType(AddRoomTypeDto addRoomTypeDto)
         {
-            return Ok(_roomService.AddRoomType(addRoomTypeDto));
+            return Ok(await _roomService.AddRoomType(addRoomTypeDto));
         }
         [HttpPut("updateRoomType")]
-        public IActionResult updateRoomType(UpdateRoomTypeDto updateRoomTypeDto)
+        public async Task<IActionResult> updateRoomType(UpdateRoomTypeDto updateRoomTypeDto)
         {
-            return Ok(_roomService.UpateRoomType(updateRoomTypeDto));
+            return Ok(await _roomService.UpateRoomType(updateRoomTypeDto));
         }
         [HttpDelete("DeleteRoomType/{id}")]
-        public IActionResult DeleteRoomType(int id)
+        public async Task<IActionResult> DeleteRoomType(int id)
         {
-            return Ok(_roomService.RemoveRoom(id));
+            return Ok(await _roomService.RemoveRoom(id));
         }
         [HttpGet("GetRoomRate")]
-        public IActionResult GetRoomRate()
+        public async Task<IActionResult> GetRoomRate()
         {
-            return Ok(_roomService.GetRoomType());
+            return Ok(await _roomService.GetRoomType());
         }
         [HttpPost("AddRoomRate")]
-        public IActionResult addRoomRate(AddRoomRateDto addRoomRateDto)
+        public async Task<IActionResult> addRoomRate(AddRoomRateDto addRoomRateDto)
         {
-            return Ok(_roomService.AddRoomRate(addRoomRateDto));
+            return Ok(await _roomService.AddRoomRate(addRoomRateDto));
         }
         [HttpPut("updateRoomRate")]
-        public IActionResult addRoomRate(UpdateRoomRateDto updateRoomRateDto)
+        public async Task<IActionResult> addRoomRate(UpdateRoomRateDto updateRoomRateDto)
         {
-            return Ok(_roomService.UpateRoomRate(updateRoomRateDto));
+            return Ok(await _roomService.UpateRoomRate(updateRoomRateDto));
         }
         [HttpDelete("DeleteRoomRate/{id}")]
-        public IActionResult DeleteRoomRate(int id)
+        public async Task<IActionResult> DeleteRoomRate(int id)
         {
-            return Ok(_roomService.RemoveRoomRate(id));
+            return Ok(await _roomService.RemoveRoomRate(id));
         }
     }
 }
