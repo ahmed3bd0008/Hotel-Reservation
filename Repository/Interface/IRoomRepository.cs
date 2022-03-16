@@ -6,6 +6,6 @@ namespace Repository.Interface
 {
     public interface IRoomRepository:IGenericRepository<Room>
     {
-         bool  isExist(Guid id);
+         bool  isExist(int id);
     }
 }

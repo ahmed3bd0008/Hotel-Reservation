@@ -6,11 +6,11 @@ namespace Repository.Configuration
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<MealPlane> builder)
         {
-           builder.HasOne(o=>o.MealType).
-           WithMany(m=>m.MealPlanes).
-           OnDelete(DeleteBehavior.
-           ClientNoAction)
-           .HasForeignKey(fk=>fk.MealTypeId);    
+        //    builder.HasOne(o=>o.MealType).
+        //    WithMany(m=>m.MealPlanes)
+        //    .HasForeignKey(fk=>fk.MealTypeId) .   
+        //    OnDelete(DeleteBehavior.
+        //    ClientNoAction);
            
           
                }

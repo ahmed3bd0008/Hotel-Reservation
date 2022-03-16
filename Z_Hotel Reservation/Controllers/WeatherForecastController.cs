@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace TestApplication.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IUntityOfWork _untityOfWork;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,IUntityOfWork untityOfWork) 
         {

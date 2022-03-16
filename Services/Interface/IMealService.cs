@@ -18,9 +18,9 @@ namespace Services.Interface
          Task<ResponseService<int>>UpateMeal(UpdateMealPlaneDto updateMealPlaneDto);
          Task<ResponseService<int>>UpateMealType(UpdateMealTypeDto updateMealTypeDto);
          Task<ResponseService<int>>UpateMealRate(UpdateMealPerPersonDto updateMealPerPersonDto);
-         Task<ResponseService<int>>RemoveMeal(Guid id);
-         Task<ResponseService<int>>RemoveMealtype(Guid id);
-         Task<ResponseService<int>>RemoveMealRate(Guid id);
+         Task<ResponseService<int>>RemoveMeal(int id);
+         Task<ResponseService<int>>RemoveMealtype(int id);
+         Task<ResponseService<int>>RemoveMealRate(int id);
 
     }
 }

@@ -10,8 +10,8 @@ namespace Entity.Core
  public   class MealType:EntityId
     {
         public string Name { set; get; }
-        public ICollection<MealPlane> MealPlanes{ set; get; }
-        public ICollection<MealPerPerson> MealPerPeoples{ set; get; }
+        // public ICollection<MealPlane> MealPlanes{ set; get; }
+        // public ICollection<MealPerPerson> MealPerPeoples{ set; get; }
 
     }
 }

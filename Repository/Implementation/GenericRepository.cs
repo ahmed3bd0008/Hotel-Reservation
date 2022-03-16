@@ -36,6 +36,7 @@ namespace Repository.Implementation
 
         public async Task<List<T>> getEntityAsync(bool track)
         {
+            var cc = await _entity.AsNoTracking().ToListAsync();
             return  track?await _entity.AsNoTracking().ToListAsync():await _entity.ToListAsync();
         }
 
@@ -47,12 +48,12 @@ namespace Repository.Implementation
         {
              return  track? _entity.AsNoTracking().Where(expression):_entity.Where(expression);
         }
-        public async Task<T> getEntityAsyncById(Guid id)
+        public async Task<T> getEntityAsyncById(int id)
         {
             return await _entity.FindAsync(id);
         }
 
-        public T getEntityById(Guid id)
+        public T getEntityById(int id)
         {
              return  _entity.Find(id);
         }
@@ -67,6 +68,9 @@ namespace Repository.Implementation
            _entity.Remove(Entity);
         }
 
-        
+        public int saveRepos()
+        {
+            return _context.SaveChanges();
+        }
     }
 }

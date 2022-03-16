@@ -28,7 +28,7 @@ namespace Repository.Implementation
               }
         public GenericRepository<RoomType> roomTypeRepository{
               get{
-                  if(_genericRepository==null)
+                  if(_roomTypeRepository==null)
                             _roomTypeRepository=new GenericRepository<RoomType>(_context);
                 return  _roomTypeRepository;
               } 
@@ -36,7 +36,7 @@ namespace Repository.Implementation
 
         public GenericRepository<RoomRate> roomRateRepository {
              get{
-                  if(_genericRepository==null)
+                  if(_roomRateRepository==null)
                             _roomRateRepository=new GenericRepository<RoomRate>(_context);
                 return  _roomRateRepository;
               } 
@@ -44,7 +44,7 @@ namespace Repository.Implementation
 
         public GenericRepository<MealPlane> MealPlaneRepository {
              get{
-                  if(_genericRepository==null)
+                  if(_mealPlaneRepository==null)
                             _mealPlaneRepository=new GenericRepository<MealPlane>(_context);
                 return  _mealPlaneRepository;
               } 
@@ -52,7 +52,7 @@ namespace Repository.Implementation
 
         public GenericRepository<MealType> MealTypeRepository {
              get{
-                  if(_genericRepository==null)
+                  if(_mealTypeRepository==null)
                             _mealTypeRepository=new GenericRepository<MealType>(_context);
                 return  _mealTypeRepository;
               } 
@@ -60,10 +60,15 @@ namespace Repository.Implementation
 
         public GenericRepository<MealPerPerson> MealPerPersonRepository {
              get{
-                  if(_genericRepository==null)
+                  if(_mealPerPersonRepository==null)
                             _mealPerPersonRepository=new GenericRepository<MealPerPerson>(_context);
                 return  _mealPerPersonRepository;
               } 
+        }
+
+        public int saveAsyn()
+        {
+            return _context.SaveChanges();
         }
 
         public async Task<int> saveAsync()

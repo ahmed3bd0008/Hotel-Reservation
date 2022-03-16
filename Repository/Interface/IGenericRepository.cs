@@ -14,8 +14,9 @@ namespace Repository.Interface
         List<T> getEntity (bool track);
         Task< List<T>> getEntityAsync (bool track);
          IQueryable<T> getEntity (Expression<Func<T,bool>> expression,bool track);
-        T getEntityById(Guid id);
-        Task< T> getEntityAsyncById(Guid id);
+        T getEntityById(int id);
+        Task< T> getEntityAsyncById(int id);
         void Remove(T Entity);
+        int saveRepos();
     }
 }

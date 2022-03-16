@@ -12,7 +12,7 @@ namespace Repository.Configuration
            OnDelete(DeleteBehavior.ClientNoAction);
 
            builder.HasMany(m=>m.reserves).WithOne(o=>o.Room).HasForeignKey(fk=>fk.RoomId).OnDelete(DeleteBehavior.ClientNoAction);
-
+         
         }
     }
 }

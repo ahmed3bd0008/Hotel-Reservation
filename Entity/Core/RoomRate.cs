@@ -13,7 +13,7 @@ namespace Entity.Core
        public decimal Price { get; set; }
        public DateTime FromDate { get; set; }
        public DateTime ToDate { get; set; }
-        public Guid RoomTypeId { get; set; }
+        public int RoomTypeId { get; set; }
         public RoomType RoomType { get; set; }
     }
 }

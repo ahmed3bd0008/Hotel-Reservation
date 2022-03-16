@@ -15,11 +15,13 @@ namespace Services.Implemenation
     {
         private readonly IUntityOfWork _untityOfWork;
         private readonly IMapper _mapper;
+        private readonly IGenericRepository<RoomType> _mealRepository;
 
-        public RoomService(IUntityOfWork untityOfWork,IMapper mapper )
+        public RoomService(IUntityOfWork untityOfWork,IMapper mapper,IGenericRepository<RoomType>mealRepository )
         {
             _untityOfWork=untityOfWork;
             _mapper=mapper;
+            _mealRepository = mealRepository;
         }
 
         public async Task<ResponseService<int>> AddRoom(AddRoomDto addRoom)
@@ -44,7 +46,7 @@ namespace Services.Implemenation
         {
             var roomType=_mapper.Map<RoomType>(addRoomTypeDto);
             await _untityOfWork.roomTypeRepository.AddEntityAsync(roomType);
-            await _untityOfWork.saveAsync();
+             _mealRepository.saveRepos();
             return new ResponseService<int>(){Data=1,Status=true,Message="success"};
         }
 
@@ -65,12 +67,12 @@ namespace Services.Implemenation
 
         public async Task<ResponseService<List<RoomTypeDto>>> GetRoomType()
         {
-           var Rooms=await _untityOfWork.roomTypeRepository.getEntityAsync( false);
+           var Rooms= _untityOfWork.roomTypeRepository.getEntity( false);
             var RoomsDto=_mapper.Map<List<RoomTypeDto>>(Rooms);
             return new ResponseService<List<RoomTypeDto>>(){Data=RoomsDto,Status=true};
         }
 
-        public async Task<ResponseService<int>> RemoveRoom(Guid id)
+        public async Task<ResponseService<int>> RemoveRoom(int id)
         {
           var Room=  await _untityOfWork.roomRepository.getEntityAsyncById(id);
           if(Room==null)
@@ -79,7 +81,7 @@ namespace Services.Implemenation
             return new ResponseService<int>(){Message="delete"};
         }
 
-        public async Task<ResponseService<int>> RemoveRoomRate(Guid id)
+        public async Task<ResponseService<int>> RemoveRoomRate(int id)
         {
            var RoomType=  await _untityOfWork.roomTypeRepository.getEntityAsyncById(id);
           if(RoomType==null)
@@ -88,7 +90,7 @@ namespace Services.Implemenation
             return new ResponseService<int>(){Message="delete"};
         }
 
-        public async Task<ResponseService<int>> RemoveRoomtype(Guid id)
+        public async Task<ResponseService<int>> RemoveRoomtype(int id)
         {
             var RoomRate=  await _untityOfWork.roomRateRepository.getEntityAsyncById(id);
             if(RoomRate==null)

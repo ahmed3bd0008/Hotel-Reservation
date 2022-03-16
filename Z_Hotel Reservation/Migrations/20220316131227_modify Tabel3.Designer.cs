@@ -10,8 +10,8 @@ using Repository.Context;
 namespace Hotel_Reservation.Migrations
 {
     [DbContext(typeof(AppDbContextTest))]
-    [Migration("20220313205052_add authorize table")]
-    partial class addauthorizetable
+    [Migration("20220316131227_modify Tabel3")]
+    partial class modifyTabel3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,31 +23,39 @@ namespace Hotel_Reservation.Migrations
 
             modelBuilder.Entity("Entity.Core.MealPerPerson", b =>
                 {
-                    b.Property<Guid>("MealTypeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MealTypeId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("MealTypeId", "ToDate", "FromDate");
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MealTypeId");
 
                     b.ToTable("MealPerPerson");
                 });
 
             modelBuilder.Entity("Entity.Core.MealPlane", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("MealTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("MealTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -61,9 +69,10 @@ namespace Hotel_Reservation.Migrations
 
             modelBuilder.Entity("Entity.Core.MealType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -75,9 +84,10 @@ namespace Hotel_Reservation.Migrations
 
             modelBuilder.Entity("Entity.Core.Person", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Countery")
                         .HasColumnType("nvarchar(max)");
@@ -96,64 +106,87 @@ namespace Hotel_Reservation.Migrations
                     b.ToTable("Person");
                 });
 
+            modelBuilder.Entity("Entity.Core.ReservesٌRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CheckFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckTo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("ReservesٌRoom");
+                });
+
             modelBuilder.Entity("Entity.Core.Room", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("RoomNum")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("RoomRateFromDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("RoomRateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("RoomRateRoomTypeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("RoomRateToDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("RoomTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RoomTypeId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoomTypeId");
-
-                    b.HasIndex("RoomRateRoomTypeId", "RoomRateFromDate", "RoomRateToDate");
 
                     b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Entity.Core.RoomRate", b =>
                 {
-                    b.Property<Guid>("RoomTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FromDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(6, 6)
                         .HasColumnType("decimal(6,6)");
 
-                    b.HasKey("RoomTypeId", "FromDate", "ToDate");
+                    b.Property<int>("RoomTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("RoomRate");
                 });
 
             modelBuilder.Entity("Entity.Core.RoomType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -362,9 +395,9 @@ namespace Hotel_Reservation.Migrations
             modelBuilder.Entity("Entity.Core.MealPerPerson", b =>
                 {
                     b.HasOne("Entity.Core.MealType", "MealType")
-                        .WithMany("MealPerPeoples")
+                        .WithMany()
                         .HasForeignKey("MealTypeId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MealType");
@@ -373,12 +406,31 @@ namespace Hotel_Reservation.Migrations
             modelBuilder.Entity("Entity.Core.MealPlane", b =>
                 {
                     b.HasOne("Entity.Core.MealType", "MealType")
-                        .WithMany("MealPlanes")
+                        .WithMany()
                         .HasForeignKey("MealTypeId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MealType");
+                });
+
+            modelBuilder.Entity("Entity.Core.ReservesٌRoom", b =>
+                {
+                    b.HasOne("Entity.Core.Person", "person")
+                        .WithMany("reserves")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Core.Room", "Room")
+                        .WithMany("reserves")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.Navigation("person");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Entity.Core.Room", b =>
@@ -388,12 +440,6 @@ namespace Hotel_Reservation.Migrations
                         .HasForeignKey("RoomTypeId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
-
-                    b.HasOne("Entity.Core.RoomRate", "RoomRate")
-                        .WithMany()
-                        .HasForeignKey("RoomRateRoomTypeId", "RoomRateFromDate", "RoomRateToDate");
-
-                    b.Navigation("RoomRate");
 
                     b.Navigation("RoomType");
                 });
@@ -460,11 +506,14 @@ namespace Hotel_Reservation.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entity.Core.MealType", b =>
+            modelBuilder.Entity("Entity.Core.Person", b =>
                 {
-                    b.Navigation("MealPerPeoples");
+                    b.Navigation("reserves");
+                });
 
-                    b.Navigation("MealPlanes");
+            modelBuilder.Entity("Entity.Core.Room", b =>
+                {
+                    b.Navigation("reserves");
                 });
 
             modelBuilder.Entity("Entity.Core.RoomType", b =>

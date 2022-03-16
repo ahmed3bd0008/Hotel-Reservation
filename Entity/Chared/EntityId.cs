@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Shared
 {
     public class EntityId
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int Id { get; set; }
     }
 }

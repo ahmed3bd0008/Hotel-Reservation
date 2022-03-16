@@ -4,7 +4,7 @@ namespace Entity.Dto
 {
     public class RoomDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
          public int RoomNum { get; set; }
      
        
@@ -15,7 +15,7 @@ namespace Entity.Dto
     }
      public class UpdateRoomDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
          public int RoomNum { get; set; }
     }
 }

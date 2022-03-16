@@ -16,7 +16,7 @@ namespace Repository.Implementation
             _appDbContext=appDbContext;
         }
       
-         bool IRoomRepository.isExist(Guid id)
+         bool IRoomRepository.isExist(int id)
         {
           return  _appDbContext.Rooms.Any(d=>d.Id==id);
         }

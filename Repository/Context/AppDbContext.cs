@@ -14,6 +14,7 @@ namespace Repository.Context
             
         }
       public   DbSet<Room>Rooms{set; get;}
+      public   DbSet<MealType>MealType{set; get;}
     protected  override void OnModelCreating(ModelBuilder modelBuilder)
     {
        base.OnModelCreating(modelBuilder);
@@ -25,6 +26,7 @@ namespace Repository.Context
         modelBuilder.ApplyConfiguration(new MealPerPersonConfiguration());
         modelBuilder.ApplyConfiguration(new PersonConfiguration());
     }
+    
 
     }
 }

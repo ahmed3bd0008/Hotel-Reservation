@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel Reservation", "TestApplication\Hotel Reservation.csproj", "{DD2EE807-7F2C-46F9-9947-D335C235158F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel Reservation", "Z_Hotel Reservation\Hotel Reservation.csproj", "{DD2EE807-7F2C-46F9-9947-D335C235158F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{D5AFE1B2-7B68-4F43-B4A1-2D193C907C3E}"
 EndProject

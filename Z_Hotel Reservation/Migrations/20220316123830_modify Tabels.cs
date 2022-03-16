@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hotel_Reservation.Migrations
 {
-    public partial class addauthorizetable : Migration
+    public partial class modifyTabels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,8 @@ namespace Hotel_Reservation.Migrations
                 name: "MealType",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -62,7 +63,8 @@ namespace Hotel_Reservation.Migrations
                 name: "Person",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     personType = table.Column<int>(type: "int", nullable: false),
                     Countery = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -77,7 +79,8 @@ namespace Hotel_Reservation.Migrations
                 name: "RoomType",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -195,14 +198,16 @@ namespace Hotel_Reservation.Migrations
                 name: "MealPerPerson",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MealTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    MealTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealPerPerson", x => new { x.MealTypeId, x.ToDate, x.FromDate });
+                    table.PrimaryKey("PK_MealPerPerson", x => x.Id);
                     table.ForeignKey(
                         name: "FK_MealPerPerson_MealType_MealTypeId",
                         column: x => x.MealTypeId,
@@ -214,9 +219,10 @@ namespace Hotel_Reservation.Migrations
                 name: "MealPlane",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MealTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    MealTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,14 +238,16 @@ namespace Hotel_Reservation.Migrations
                 name: "RoomRate",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<decimal>(type: "decimal(6,6)", precision: 6, scale: 6, nullable: false),
                     FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(6,6)", precision: 6, scale: 6, nullable: false)
+                    RoomTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomRate", x => new { x.RoomTypeId, x.FromDate, x.ToDate });
+                    table.PrimaryKey("PK_RoomRate", x => x.Id);
                     table.ForeignKey(
                         name: "FK_RoomRate_RoomType_RoomTypeId",
                         column: x => x.RoomTypeId,
@@ -251,27 +259,44 @@ namespace Hotel_Reservation.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoomNum = table.Column<int>(type: "int", nullable: false),
-                    RoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomRateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomRateRoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    RoomRateFromDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RoomRateToDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RoomTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rooms_RoomRate_RoomRateRoomTypeId_RoomRateFromDate_RoomRateToDate",
-                        columns: x => new { x.RoomRateRoomTypeId, x.RoomRateFromDate, x.RoomRateToDate },
-                        principalTable: "RoomRate",
-                        principalColumns: new[] { "RoomTypeId", "FromDate", "ToDate" },
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Rooms_RoomType_RoomTypeId",
                         column: x => x.RoomTypeId,
                         principalTable: "RoomType",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReservesٌRoom",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CheckFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    PersonId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservesٌRoom", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReservesٌRoom_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ReservesٌRoom_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                 });
 
@@ -315,14 +340,29 @@ namespace Hotel_Reservation.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MealPerPerson_MealTypeId",
+                table: "MealPerPerson",
+                column: "MealTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MealPlane_MealTypeId",
                 table: "MealPlane",
                 column: "MealTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rooms_RoomRateRoomTypeId_RoomRateFromDate_RoomRateToDate",
-                table: "Rooms",
-                columns: new[] { "RoomRateRoomTypeId", "RoomRateFromDate", "RoomRateToDate" });
+                name: "IX_ReservesٌRoom_PersonId",
+                table: "ReservesٌRoom",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReservesٌRoom_RoomId",
+                table: "ReservesٌRoom",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomRate_RoomTypeId",
+                table: "RoomRate",
+                column: "RoomTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomTypeId",
@@ -354,10 +394,10 @@ namespace Hotel_Reservation.Migrations
                 name: "MealPlane");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "ReservesٌRoom");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "RoomRate");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -369,7 +409,10 @@ namespace Hotel_Reservation.Migrations
                 name: "MealType");
 
             migrationBuilder.DropTable(
-                name: "RoomRate");
+                name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "RoomType");

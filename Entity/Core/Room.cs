@@ -7,7 +7,7 @@ namespace Entity.Core
     public class Room : EntityId
     {
         public int RoomNum { get; set; }
-        public Guid RoomTypeId { set; get; }
+        public int RoomTypeId { set; get; }
         public RoomType RoomType { get; set; }
 
         public ICollection<ReservesٌRoom> reserves { get; set; }

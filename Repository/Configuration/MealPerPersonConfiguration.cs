@@ -6,10 +6,10 @@ namespace Repository.Configuration
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<MealPerPerson> builder)
         {
-           builder.HasOne(d=>d.MealType).
-           WithMany(m=>m.MealPerPeoples).
-           HasForeignKey(fk=>fk.MealTypeId).
-           OnDelete(DeleteBehavior.ClientNoAction); 
+        //    builder.HasOne(d=>d.MealType).
+        //    WithMany(m=>m.MealPerPeoples).
+        //    HasForeignKey(fk=>fk.MealTypeId).
+        //    OnDelete(DeleteBehavior.ClientNoAction); 
 
          
         }

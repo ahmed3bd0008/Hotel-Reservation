@@ -13,5 +13,6 @@ namespace Repository.Interface
            GenericRepository<MealType> MealTypeRepository { get; }
            GenericRepository<MealPerPerson>MealPerPersonRepository { get; }
            Task<int>saveAsync();
+           int saveAsyn();
     }
 }

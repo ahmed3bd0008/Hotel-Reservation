@@ -5,7 +5,7 @@ namespace Entity.Dto
     public class MealPlaneDto
     {
            public string Name { get; set; }
-           public Guid Id { set; get; }   
+           public int Id { set; get; }   
     }
      public class AddMealPlaneDto
     {
@@ -14,6 +14,6 @@ namespace Entity.Dto
      public class UpdateMealPlaneDto
     {
           public string Name { get; set; }
-           public Guid Id { set; get; }  
+           public int Id { set; get; }  
     }
 }

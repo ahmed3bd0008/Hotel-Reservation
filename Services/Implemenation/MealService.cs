@@ -42,10 +42,17 @@ namespace Services.Implemenation
 
         public async Task<ResponseService<int>> AddMealType(AddMealTypeDto addMealTypeDto)
         {
-            var MealType=_mapper.Map<MealType>(addMealTypeDto);
-            await _untityOfWork.MealTypeRepository.AddEntityAsync(MealType);
-            await _untityOfWork.saveAsync();
-            return new ResponseService<int>(){Data=1,Status=true,Message="success"};
+            try
+            {
+                var MealType = _mapper.Map<MealType>(addMealTypeDto);
+                await _untityOfWork.MealTypeRepository.AddEntityAsync(MealType);
+                await _untityOfWork.saveAsync();
+                return new ResponseService<int>() { Data = 1, Status = true, Message = "success" };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseService<int>() { Data = 1, Status = true, Message = ex.InnerException.Message };
+            }
         }
 
         public async Task<ResponseService<List<MealPerPersonDto>>> GetMealRate()
@@ -70,7 +77,7 @@ namespace Services.Implemenation
             return new ResponseService<List<MealTypeDto>>(){Data=MealsDto,Status=true};
         }
 
-        public async Task<ResponseService<int>> RemoveMeal(Guid id)
+        public async Task<ResponseService<int>> RemoveMeal(int id)
         {
           var Meal=  await _untityOfWork.MealPlaneRepository.getEntityAsyncById(id);
           if(Meal==null)
@@ -79,7 +86,7 @@ namespace Services.Implemenation
             return new ResponseService<int>(){Message="delete"};
         }
 
-        public async Task<ResponseService<int>> RemoveMealRate(Guid id)
+        public async Task<ResponseService<int>> RemoveMealRate(int id)
         {
            var MealType=  await _untityOfWork.MealTypeRepository.getEntityAsyncById(id);
           if(MealType==null)
@@ -88,7 +95,7 @@ namespace Services.Implemenation
             return new ResponseService<int>(){Message="delete"};
         }
 
-        public async Task<ResponseService<int>> RemoveMealtype(Guid id)
+        public async Task<ResponseService<int>> RemoveMealtype(int id)
         {
             var MealRate=  await _untityOfWork.MealPerPersonRepository.getEntityAsyncById(id);
             if(MealRate==null)

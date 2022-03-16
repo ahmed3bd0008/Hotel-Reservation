@@ -17,9 +17,9 @@ namespace Services.Interface
          Task<ResponseService<int>>UpateRoom(UpdateRoomDto updateRoomDto);
          Task<ResponseService<int>>UpateRoomType(UpdateRoomTypeDto updateRoomTypeDto);
          Task<ResponseService<int>>UpateRoomRate(UpdateRoomRateDto updateRoomRateDto);
-         Task<ResponseService<int>>RemoveRoom(Guid id);
-         Task<ResponseService<int>>RemoveRoomtype(Guid id);
-         Task<ResponseService<int>>RemoveRoomRate(Guid id);
+         Task<ResponseService<int>>RemoveRoom(int id);
+         Task<ResponseService<int>>RemoveRoomtype(int id);
+         Task<ResponseService<int>>RemoveRoomRate(int id);
 
     }
 }
