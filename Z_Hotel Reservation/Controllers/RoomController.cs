@@ -66,7 +66,7 @@ namespace TestApplication.Controllers
         [HttpGet("GetRoomRate")]
         public async Task<IActionResult> GetRoomRate()
         {
-            return Ok(await _roomService.GetRoomType());
+            return Ok(await _roomService.GetRoomRate());
         }
         [HttpPost("AddRoomRate")]
         public async Task<IActionResult> addRoomRate(AddRoomRateDto addRoomRateDto)

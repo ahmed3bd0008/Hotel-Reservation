@@ -13,7 +13,7 @@ namespace Entity.Dto
     }
      public class AddRoomRateDto
     {
-         public decimal Price { get; set; }
+       public decimal Price { get; set; }
        public DateTime FromDate { get; set; }
        public DateTime ToDate { get; set; }
         public int RoomTypeId { get; set; }
