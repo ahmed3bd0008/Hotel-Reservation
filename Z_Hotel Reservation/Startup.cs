@@ -40,6 +40,16 @@ namespace TestApplication
             
             services.ConnectedSql(Configuration);
 
+            //Add Cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                .WithMethods("PUT", "DELETE", "GET");
+                    });
+            });
             //Authenication 
             services.AddAuthentication();
             services.ConfigurationIdentity();
@@ -57,8 +67,9 @@ namespace TestApplication
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
